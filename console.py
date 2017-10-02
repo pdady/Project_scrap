@@ -29,15 +29,15 @@ def prompt_command(
                 max_items = input("How many items? -->> ")
                 if (check_is_digit(max_items)):
                     if (max_items == "0"):
-                        output_mode(mode, all_products, max_items)
+                        get.output_mode(mode, all_products, max_items)
                     else:
                         brand[int(number) - 1] = get.info_from_url(
                                                         brand[int(number) - 1],
                                                         all_products,
                                                         int(max_items), mode)
-        prompt_command(all_products, brand, max_items)
+        prompt_command(all_products, brand)
     elif (number != "exit"):
-        prompt_command(all_products, brand, max_items)
+        prompt_command(all_products, brand)
 
 
 # Comand line
