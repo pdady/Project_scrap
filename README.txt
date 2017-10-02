@@ -6,7 +6,7 @@ pip3 install fake-useragent
 
 
 Le script marche de 2 façons, soit en mode console ou directement depuis le main en utilisant la fonction info_from_url,
-pour utiliser la fonction il suffit de commenter la fonction get_argument dans le main et de décommanter les deux lignes suivantes.
+pour utiliser la fonction il suffit de commenter la fonction get_argument dans le main du fichier scraper.py et de décommanter les deux lignes suivantes.
 
 Tous les articles récupérés depuis l’URL de départ seront stocké dans la liste all_products sous forme de dictionnaires.
 
