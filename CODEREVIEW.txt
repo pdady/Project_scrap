@@ -1,0 +1,60 @@
+Le script est donc découpé en 2 parties, d’un côté pour récupérer les données depuis une URL et un mode console:
+
+Module utilisé: lxml, requests
+
+Les lignes sont marquées entre ‘()’
+
+
+get.py
+
+
+(108)	info_from_url va commencer par faire un get à l’URL envoyé grâce à la fonction get_all_info (95)
+	qui en utilisant des chemins xpath va récupérer des listes en fonction des données voulues.
+	Il arrive parfois de récupérer une erreur 503, on attend donc quelques secondes et on relance get_all_info.
+	Une fois que la liste all_info est remplie on l’envoie à la fonction fill_items.
+	La fonction renvoi l’URL actuel, pour évitez de recommencer à la page 1 
+
+
+(74)	fill_items va enlever les éléments parasites (77), ensuite remplir la liste all_products avec toutes les données récupérées depuis get_all_info,
+	sous forme de dictionnaire à l’aide de la fonction put_in_data (43). Une vérification est faite avant
+	pour vérifier que l’un des produits récupérer se trouve pas déjà dans all_products.
+	Une fois toutes les informations transférées, on récupère la page suivante.
+	out_put_mode (21) va en fonction du mode écrire le résultat sur la sortie standard ou dans results.txt
+	Si il nous reste des articles a récupérer car max_items est pas encore à 0 et qu’il reste articles sur le site, on relance.
+	
+
+
+
+
+
+scraper.py
+
+(6)	all_products est la liste où seront stockées toutes les informations récupérées.
+
+(7)	Liste contenant plusieurs URL de marques différentes avec en dernier une URL regroupant toutes les marques.
+
+(17)	Lancement du mode console.
+
+(18)	appel de info_from_url depuis le fichier get, avec comme argurments respectifs:
+		- l’URL de toutes les marques
+		- La liste all_products
+		- 5 articles maximums
+		- Mode 0, pour utiliser directement la fonction sans output
+
+(18)	Fonction pour afficher le contenus de all_products
+
+
+
+
+
+
+console.py
+
+(44)	get_argument va récupérer l’argument en ligne de commande, ‘-c’ pour le mode console,
+	‘-n’ pour un simple affichage avec un nombre max d’articles.
+	En fonction du résultat la fonction prompt_command ou info_from_url est directement appelé.
+
+
+(15)	prompt_command est le menu du mode console pour sélectionner une marque, un mode d’affichage, et enfin un nombre max d’articles.
+	La fonction est rappelée sur elle même tant que ‘exit’ n’est pas entré.
+	Elle vérifie que les entrées sont cohérentes, comme que ce soit bien des chiffres pour sélectionner quelque chose.	
